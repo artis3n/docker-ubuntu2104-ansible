@@ -2,7 +2,7 @@
 
 .PHONY: lint
 lint:
-	docker run --rm -i hadolint/hadolint hadolint --ignore DL3008 --ignore DL3013 --ignore SC2016 - < Dockerfile
+	hadolint --ignore DL3008 --ignore DL3013 --ignore SC2016 Dockerfile
 
 .PHONY: size
 size: build
@@ -19,7 +19,7 @@ test-edit: build
 
 .PHONY: build
 build:
-	DOCKER_BUILDKIT=1 docker build . -t artis3n/docker-ubuntu2104-ansible:$${TAG:-test}
+	docker build . -t artis3n/docker-ubuntu2104-ansible:$${TAG:-test}
 
 .PHONY: run
 run: build
